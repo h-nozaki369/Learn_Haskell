@@ -1,29 +1,52 @@
-html_ :: String -> String
-html_ = el "html" 
+newtype Html = Html String
+newtype Structure = Structure String
 
-body_ :: String -> String
-body_ = el "body"
+getStructureString :: Structure -> String
+getStructureString struct =
+    case struct of
+    Structure str -> str
 
-head_ :: String -> String
-head_ = el "head"
+body_ :: String -> Structure
+body_ = Structure . el "body"
 
-title_ :: String -> String
-title_ = el "title"
+head_ :: String -> Structure
+head_ = Structure . el "head"
 
-p_ :: String -> String
-p_ = el "p"
+title_ :: String -> Structure
+title_ = Structure . el "title"
 
-h1_ :: String -> String
-h1_ = el "h1"
+p_ :: String -> Structure
+p_ = Structure . el "p"
 
-makeHtml :: String -> String -> String
-makeHtml title body = html_ (head_ (title_ title) <> body_ body)
+h1_ :: String -> Structure
+h1_ = Structure . el "h1"
 
-myhtml :: String
+append_ :: Structure -> Structure -> Structure
+append_ (Structure a) (Structure b) =
+    Structure (a <> b)
+
+render :: Html -> String
+render html =
+    case html of
+    Html str -> str
+
+type Title = String
+
+html_ :: Title -> Structure -> Html
+html_ title (Structure body) =
+    Html (el "head" (el "title" title) <> el "body" body)
+
+myhtml :: Html
 myhtml =
-    makeHtml
-    "Hello title"
-    (h1_ "Hello, world!" <> p_ "Let's learn about Haskell!")
+    html_
+    "My title"
+    (append_
+        (h1_ "Heading")
+        (append_
+            (p_ "Paragraph #1")
+            (p_ "Paragraph #2")
+        )
+    )
 
 el :: String -> String -> String
 el tag content =
