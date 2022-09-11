@@ -19,6 +19,15 @@ el :: String -> String -> String
 el tag content =
   "<" <> tag <> ">" <> content <> "</" <> tag <> ">"
 
+ul_ :: [Structure] -> Structure
+ul_ = Structure . el "ul" . concatMap (el "li" . getStructureString)
+
+ol_ :: [Structure] -> Structure
+ol_ = Structure . el "ol" . concatMap (el "li" . getStructureString)
+
+code_ :: String -> Structure
+code_ = Structure . el "pre" . escape
+
 append_ :: Structure -> Structure -> Structure
 append_ (Structure a) (Structure b) =
     Structure (a <> b)
