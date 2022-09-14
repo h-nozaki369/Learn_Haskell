@@ -11,9 +11,9 @@ myhtml =
     html_
     "My title"
     ( (h1_ "Heading")
-      `append_` (p_ "Paragraph #1")
-      `append_` (p_ "Paragraph #2")
-      `append_`
+      <> (p_ "Paragraph #1")
+      <> (p_ "Paragraph #2")
+      <>
         ul_ 
           [ p_ "item 1"
           , p_ "item 2"

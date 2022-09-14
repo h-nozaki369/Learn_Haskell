@@ -28,9 +28,9 @@ ol_ = Structure . el "ol" . concatMap (el "li" . getStructureString)
 code_ :: String -> Structure
 code_ = Structure . el "pre" . escape
 
-append_ :: Structure -> Structure -> Structure
-append_ (Structure a) (Structure b) =
-    Structure (a <> b)
+instance Semigroup Structure where
+    (<>) (Structure a) (Structure b) =
+        Structure (a <> b)
 
 getStructureString :: Structure -> String
 getStructureString struct =
