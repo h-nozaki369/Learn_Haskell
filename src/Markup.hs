@@ -1,6 +1,6 @@
 module Markup
     ( Document
-    , Structure
+    , Structure (..)
     )
 where
 
