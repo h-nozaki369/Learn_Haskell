@@ -1,7 +1,7 @@
 cabal-version:      2.4
-name:               Learn-Haskell
+name:               hs-blog
 version:            0.1.0.0
-synopsis:
+synopsis:           A custom blog generator
 
 -- A longer description of the package.
 -- description:
@@ -18,21 +18,32 @@ maintainer:         nozaki369@outlook.jp
 -- category:
 extra-source-files: CHANGELOG.md
 
+common common-settings
+    default-language: Haskell2010
+    ghc-options:
+        -Wall
+
 library
-    exposed-modules:  Html
-                    , Markup
-                    , Convert
+    import: common-settings
+    exposed-modules:
+        HsBlog
+            HsBlog.Convert
+            HsBlog.Html
+                HsBlog.Html.Internal
+            HsBlog.Markup
 
     -- Modules included in this library but not exported.
-    other-modules: Html.Internal
+    -- other-modules:
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0
+                    , directory
     hs-source-dirs:   src
     default-language: Haskell2010
 
 executable Learn-Haskell
+    import: common-settings
     main-is:          Main.hs
 
     -- Modules included in this executable, other than Main.
@@ -42,11 +53,12 @@ executable Learn-Haskell
     -- other-extensions:
     build-depends:
           base ^>=4.14.3.0
-        , Learn-Haskell
-        , directory
+        , hs-blog
 
     hs-source-dirs:   app
     default-language: Haskell2010
+    ghc-options:
+        -O
 
 test-suite Learn-Haskell-test
     default-language: Haskell2010
