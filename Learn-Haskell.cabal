@@ -21,6 +21,7 @@ extra-source-files: CHANGELOG.md
 library
     exposed-modules:  Html
                     , Markup
+                    , Convert
 
     -- Modules included in this library but not exported.
     other-modules: Html.Internal
@@ -40,8 +41,9 @@ executable Learn-Haskell
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
     build-depends:
-        base ^>=4.14.3.0,
-        Learn-Haskell
+          base ^>=4.14.3.0
+        , Learn-Haskell
+        , directory
 
     hs-source-dirs:   app
     default-language: Haskell2010
