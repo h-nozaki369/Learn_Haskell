@@ -38,21 +38,23 @@ library
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
     build-depends:    base ^>=4.14.3.0
-                    , directory
     hs-source-dirs:   src
     default-language: Haskell2010
 
-executable Learn-Haskell
+executable hs-blog-gen
     import: common-settings
     main-is:          Main.hs
 
     -- Modules included in this executable, other than Main.
-    -- other-modules:
+    other-modules:
+        OptParse
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
     build-depends:
           base ^>=4.14.3.0
+        , directory
+        , optparse-applicative
         , hs-blog
 
     hs-source-dirs:   app
